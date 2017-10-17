@@ -4,8 +4,8 @@ A simple python hello-world-driver which connects with Databox.
 
 The databox container manager install a driver, it reads the SLA associated with the driver and set following Environment Variables:
 ```
-DATABOX_ARBITER_ENDPOINT =
-DATABOX_LOCAL_NAME = <driver_name>
+DATABOX_ARBITER_ENDPOINT
+DATABOX_LOCAL_NAME
 DATABOX_STORE_ENDPOINT
 DATABOX_ROOT_CA
 Localcontainername_PEM
