@@ -35,12 +35,11 @@ databox.registerDatasource(DATABOX_STORE_ENDPOINT, template)
 ### Manifest template 
 In the manifest, two important things to notice here are "databox-type" and "resource-requirements" - "store". When the driver is installed, a data store of type mentioned in "store" is launched.
 
-{
-	"manifest-version": 1,
+```
+{	"manifest-version": 1,
 	"name": "driver-hello-world",
 	"databox-type": "driver",
 	"version": "0.1.0",
-
 	"description": "A template Databox driver in Python",
 	"author": "Poonam Yadav <p.yadav@acm.org> (http://poonamyadav.net/)",
 	"license": "MIT",
@@ -62,7 +61,7 @@ In the manifest, two important things to notice here are "databox-type" and "res
 		"store": "store-json"
 	}
 }
-
+```
 From app-server, these are the following APIs exposed to SDK, which allows accessing of the databox.
 
 ```/api/datasource/list
