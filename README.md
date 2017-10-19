@@ -37,7 +37,6 @@ In the manifest, two important things to notice here are "databox-type" and "res
 
 {
 	"manifest-version": 1,
-   
 	"name": "driver-hello-world",
 	"databox-type": "driver",
 	"version": "0.1.0",
