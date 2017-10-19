@@ -1,30 +1,31 @@
-import utils
+import lib.utils as utils
 import urllib3
 
 
 def getRootCatalog():
-    return utils.makeArbiterRequest('GET', '/cat', True)
+	return utils.makeArbiterRequest('GET', '/cat', {'True': True})
 
+# this function is CM-facing - so only be called from Container manager
 def getStoreCatalog(href):
     rurl = urllib3.util.parse_url(href)
     newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port) + '/cat'
-    return utils.makeStoreRequest(method = 'GET', url=newurl)
+    return utils.makeStoreRequest(method = 'GET', json={'True': True}, url=newurl)
 
 def listAvailableStores():
-    return getRootCatalog()
+	return getRootCatalog()
 
 def walkStoreCatalogs():
     getRootCatalog()
 
 def mapStoreCatalogs():
-    walkStoreCatalogs()
+	walkStoreCatalogs()
 
 
 def registerDatasource(href, metadata):
     rurl = urllib3.util.parse_url(href)
     newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port)
     cat = {
-			"item-metadata": [{
+		"item-metadata": [{
 					"rel": "urn:X-hypercat:rels:hasDescription:en",
 					"val": metadata.description
 				}, {
@@ -43,9 +44,8 @@ def registerDatasource(href, metadata):
 					"rel": "urn:X-databox:rels:hasStoreType",
 					"val": metadata.storeType
 				}],
-        newurl:  newurl+ '/' + metadata.datasourceid
+        "href":  newurl+ '/' + metadata.datasourceid
 		}
-
-    return utils.makeStoreRequest(method='POST', json=cat, url=newurl+'/cat')
+	return utils.makeStoreRequest(method='POST', json=cat, url=newurl+'/cat')
 
 

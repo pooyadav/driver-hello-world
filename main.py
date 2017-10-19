@@ -2,7 +2,7 @@ __author__ = "Poonam Yadav"
 __copyright__ = "Copyright 2007, The Databox Project"
 __email__ = "p.yadav@acm.org"
 
-import lib.utils as databox
+import lib as databox
 import urllib3
 import os
 import json
@@ -30,8 +30,11 @@ fp_key.close()
 data = {}
 
 dx = databox.waitForStoreStatus(store, 'active', 100)
+print("Store is active now")
+cat = databox.getRootCatalog()
+print("Root Catalog " + cat)
 
-print("dx")
+
 
 app = Flask(__name__)
 

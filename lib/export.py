@@ -1,4 +1,4 @@
-import utils
+import lib.utils as utils
 import os
 import json
 exportServiceURL = os.environ['DATABOX_EXPORT_SERVICE_ENDPOINT']
