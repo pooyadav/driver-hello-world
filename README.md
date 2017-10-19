@@ -18,7 +18,7 @@ Localcontainername_key=ARBITER_TOKEN
 
 when a datastore gets a request from a driver to read/write - (what does it do?)
 ### Manifest template 
-In the manifest, two important things to notice here are "databox-type" and "resource-requirements" - "store".
+In the manifest, two important things to notice here are "databox-type" and "resource-requirements" - "store". When the driver is installed, a data store of type mentioned in "store" is launched.
 
 {
 	"manifest-version": 1,
@@ -49,9 +49,7 @@ In the manifest, two important things to notice here are "databox-type" and "res
 	}
 }
 
-
-```index.js fetches manifest from appstore ->  main.js - > server.js -> container-manager.js 
-```
+From app-server, these are the following APIs exposed to SDK, which allows accessing of the databox.
 
 ```/api/datasource/list
    /api/installed/list
