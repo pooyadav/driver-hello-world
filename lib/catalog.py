@@ -7,24 +7,24 @@ def getRootCatalog():
 
 # this function is CM-facing - so only be called from Container manager
 def getStoreCatalog(href):
-    rurl = urllib3.util.parse_url(href)
-    newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port) + '/cat'
-    return utils.makeStoreRequest(method = 'GET', json={'True': True}, url=newurl)
+	rurl = urllib3.util.parse_url(href)
+	newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port) + '/cat'
+	return utils.makeStoreRequest(method = 'GET', json={'True': True}, url=newurl)
 
 def listAvailableStores():
 	return getRootCatalog()
 
 def walkStoreCatalogs():
-    getRootCatalog()
+	getRootCatalog()
 
 def mapStoreCatalogs():
 	walkStoreCatalogs()
 
 
 def registerDatasource(href, metadata):
-    rurl = urllib3.util.parse_url(href)
-    newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port)
-    cat = {
+	rurl = urllib3.util.parse_url(href)
+	newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port)
+	cat = {
 		"item-metadata": [{
 					"rel": "urn:X-hypercat:rels:hasDescription:en",
 					"val": metadata.description
