@@ -1,7 +1,7 @@
 # databox hello-world-driver
 A simple python hello-world-driver which connects with Databox.
 
-The databox container manager install a driver, it reads the SLA associated with the driver and set following Environment Variables:
+When a driver is installed from the Databox UI, this passes the request to  the databox container manager (CM), which installs the driver. CM reads the SLA associated with the driver and set the following Environment Variables:
 ```
 DATABOX_ARBITER_ENDPOINT
 DATABOX_LOCAL_NAME
@@ -11,8 +11,9 @@ Localcontainername_PEM
 Localcontainername.pem
 Localcontainername_key=ARBITER_TOKEN
 ```
-1. To integrate a driver as a databox driver, driver needs to have access to the keys and token to access stores.
-2. Driver reqests a data-store by configuring it in the databox-manifest.json file - template shown below. When container manager install the driver, it also launches a datastore of the requested type.
+Therefore, 
+1. to integrate a driver as a databox driver, driver needs to have access to the keys and token to access stores.
+2. Driver requests a data-store by configuring it in the databox-manifest.json file - template shown below. When container manager install the driver, it also launches a data-store of the requested type.
 3. Configure and create data types - template of information which need to provide to the API.
 ```
  template = {	description: 'Any Driver text',
@@ -26,8 +27,9 @@ Localcontainername_key=ARBITER_TOKEN
 ```
 databox.registerDatasource(DATABOX_STORE_ENDPOINT, template)
 ```
-4. Driver fetches data from a data-source and store in the datastore.
-4. Then it writes to the datastore by composing a request - it sends arbiter key in the request.
+4. Driver fetches data from a data-source that to be stored in the data-store.
+5. Driver configure Meta-data for the data-store and register 
+6. Then the driver writes to the data-store by composing a request - it sends arbiter key in the request. 
 5. In a "store" of type "store-json", following APIs could be called.
 
 
