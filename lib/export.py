@@ -2,7 +2,7 @@ import lib.utils as utils
 import os
 import json
 
-exportServiceURL = os.environ.get['DATABOX_EXPORT_SERVICE_ENDPOINT']
+#exportServiceURL = os.environ['DATABOX_EXPORT_SERVICE_ENDPOINT']
 
 def longpoll(destination, payload):
     raise NotImplementedError
