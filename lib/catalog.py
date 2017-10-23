@@ -1,7 +1,7 @@
 import lib.utils as utils
 import urllib3
 
-
+#this function returns Datastore catalogs registers with the Arbiter.
 def getRootCatalog():
 	return utils.makeArbiterRequest('GET', '/cat', {'True': True})
 

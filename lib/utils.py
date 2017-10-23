@@ -6,8 +6,8 @@ from urllib.parse import urlencode
 import time
 
 
-arbiter = os.environ['DATABOX_ARBITER_ENDPOINT']
-hostname = os.environ['DATABOX_LOCAL_NAME']
+arbiter = os.environ.get['DATABOX_ARBITER_ENDPOINT']
+hostname = os.environ.get['DATABOX_LOCAL_NAME']
 
 arbiterToken = open("/run/secrets/ARBITER_TOKEN", "rb").read()
 arbiterTokenbase64 = base64.b64encode(arbiterToken)
