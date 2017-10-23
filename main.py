@@ -32,9 +32,7 @@ data = {}
 dx = databox.waitForStoreStatus(store, 'active', 100)
 print("Store is active now")
 cat = databox.getRootCatalog()
-print("Root Catalog " + cat)
-
-
+print("Root Catalog " + str(cat))
 
 app = Flask(__name__)
 
