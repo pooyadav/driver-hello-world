@@ -9,10 +9,10 @@ import json
 from flask import Flask
 import ssl
 
-store= os.environ.get['DATABOX_STORE_ENDPOINT']
+store= os.environ['DATABOX_STORE_ENDPOINT']
 print('Store ' + store)
 
-hostname = os.environ.get['DATABOX_LOCAL_NAME']
+hostname = os.environ['DATABOX_LOCAL_NAME']
 
 dpem = open("/run/secrets/DATABOX_PEM").read()
 #print(dpem)
