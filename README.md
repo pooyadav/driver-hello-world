@@ -14,7 +14,17 @@ Localcontainername_key=ARBITER_TOKEN
 Therefore, 
 1. to integrate a driver as a databox driver, driver needs to have access to the keys and token to access stores.
 2. Driver requests a data-store by configuring it in the databox-manifest.json file - template shown below. When container manager install the driver, it also launches a data-store of the requested type.
-3. Configure and create data types - template of information which need to provide to the API.
+3. In a "store" of type "store-json", following APIs could be called.
+
+```
+GET - driver-hello-world-store-json/status
+GET - driver-hello-world-store-json/ws
+GET - driver-hello-world-store-json/sub/*
+GET - driver-hello-world-store-json/unsub/*
+POST - driver-hello-world-store-json/cat 
+
+```
+4. Configure and create data types - template of information which need to provide to the API.
 ```
  template = {	description: 'Any Driver text',
         	contentType: 'text/json',
@@ -27,10 +37,7 @@ Therefore,
 ```
 databox.registerDatasource(DATABOX_STORE_ENDPOINT, template)
 ```
-4. Driver fetches data from a data-source that to be stored in the data-store.
-5. Driver configure Meta-data for the data-store and register 
-6. Then the driver writes to the data-store by composing a request - it sends arbiter key in the request. 
-5. In a "store" of type "store-json", following APIs could be called.
+5. Then the driver writes to the data-store by composing a request - it sends arbiter key in the request. 
 
 
 
