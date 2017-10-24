@@ -54,17 +54,19 @@ def requestToken(hostname, endpoint, method):
     })
 
 
-def makeStoreRequest(method, json, url):
+def makeStoreRequest(method, jsonData, url):
     tokenCache = {}
-    route = {'target': urllib3.util.parse_url(url).host, 'path': urllib3.util.parse_url(url).path, 'method': 'GET'}
+    encoded_body = json.dumps(jsonData)
+    route = {'target': urllib3.util.parse_url(url).host, 'path': urllib3.util.parse_url(url).path, 'method': method}
     routeHash = json.dumps(route)
     if (routeHash not in tokenCache):
         token = requestToken(route['target'], route['path'], route['method'])
         if (token is not None):
-            coded64token = base64.b64encode(token)
-            tokenCache[routeHash] = coded64token
+            #coded64token = base64.b64encode(token)
+            #tokenCache[routeHash] = coded64token
+            tokenCache[routeHash] = token
             try:
-                store_response = http.request(method=method, url=url, headers={'X-Api-Key': tokenCache[routeHash], 'Content-Type': 'application/json'})
+                store_response = http.request(method=method, url=url, body=encoded_body, headers={'X-Api-Key': tokenCache[routeHash], 'Accept-Encoding': 'UTF-8', 'Content-Type': 'application/json'})
                 return store_response.data
             except Exception as err:
                 print("[makeStoreRequest] error" + repr(err))
@@ -73,8 +75,7 @@ def makeStoreRequest(method, json, url):
             return token
     else:
         try:
-            store_response = http.request(method=method, url=url,
-                                          headers={'X-Api-Key': tokenCache[routeHash], 'Content-Type': 'application/json'})
+            store_response = http.request(method=method, url=url, body=encoded_body, headers={'X-Api-Key': tokenCache[routeHash], 'Accept-Encoding': 'UTF-8', 'Content-Type': 'application/json'})
             return store_response.data
         except Exception as err:
             print("[makeStoreRequest] error" + repr(err))
@@ -85,12 +86,12 @@ def waitForStoreStatus(href, status, maxRetries):
         tries = 1
         rurl = urllib3.util.parse_url(href)
         newurl = rurl.scheme + ':' + '//' + rurl.host + ':' + str(rurl.port) + '/status'
-        statusreceived = makeStoreRequest(method='GET', json={'True': True}, url=newurl)
+        statusreceived = makeStoreRequest(method='GET', jsonData={'True': True}, url=newurl)
         while ((statusreceived is None) and (tries < maxRetries)):
             tries = tries + 1
             print("[waitForStoreStatus] Retrying in 2s...")
             time.sleep(2)
-            statusreceived = makeStoreRequest(method='GET', url=newurl)
+            statusreceived = makeStoreRequest(method='GET', jsonData={'True': True}, url=newurl)
             print("status recieved " + statusreceived)
             if (str(statusreceived, 'utf8') == str(status)):
                 return
