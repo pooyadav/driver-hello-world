@@ -48,7 +48,7 @@ print("Root Catalog " + str(cat))
 
 #Register a datastore catalog with the store.
 dataSourceTemp = json.dumps({
-        "description":'hello-world',
+        "description":'helloworld',
         "contentType":'text/json',
         "vendor":'Databox Inc.',
         "type":'helloworld',
