@@ -26,6 +26,6 @@
 
 
 	"resource-requirements": {
-		"store": "store-timeseries"
+		"store": "store-json"
 	}
 }
