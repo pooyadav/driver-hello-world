@@ -3,6 +3,7 @@ import websocket
 import urllib3
 from pyee import EventEmitter
 import json
+import sys
 CM_HTTPS_CA_ROOT_CERT = open("/run/secrets/DATABOX_ROOT_CA").read()
 
 ee = EventEmitter()
@@ -42,8 +43,10 @@ def connect(href):
                               on_close = on_close)
             ws.on_open = on_open
             ws.run_forever()
-        except:
+        except Exception as e:
+            print(e)
             print("[Websocket Connection Error]")
+           
 
 def subscribe(href, dataSourceID, type1):
         if(type1 is None or not type1):
