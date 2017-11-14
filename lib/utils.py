@@ -18,7 +18,7 @@ if CM_HTTPS_CA_ROOT_CERT is not None:
     http = urllib3.PoolManager(
     ca_certs='/run/secrets/DATABOX_ROOT_CA')
 else:
-    print('Warning: No HTTPS root certficate provided so Databox HTTPS certificates will not be checked')
+    print('Warning: No HTTPS root certificate provided so Databox HTTPS certificates will not be checked')
 
 #def getHttpsCredentials():
 #    credentials = {}
