@@ -1,6 +1,4 @@
 import lib.utils as utils
-import os
-import asyncio
 import websocket
 import urllib3
 from pyee import EventEmitter
