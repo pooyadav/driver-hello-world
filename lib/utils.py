@@ -40,7 +40,7 @@ def makeArbiterRequest(method, path, data):
         if (response.status < 200 and response.status >= 300):
             raise Exception("[API Error]" + str(response.status))
         else:
-            print("Response from arbiter " + str(response.data))
+            #print("Response from arbiter " + str(response.data))
             return response.data
     except Exception as err:
         print("[makeArbiterRequest] error " + repr(err))
