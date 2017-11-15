@@ -3,7 +3,7 @@ import websocket
 import urllib3
 from pyee import EventEmitter
 import json
-import sys
+import ssl
 CM_HTTPS_CA_ROOT_CERT = open("/run/secrets/DATABOX_ROOT_CA").read()
 
 ee = EventEmitter()
@@ -21,7 +21,7 @@ def on_message(ws, message, data):
     print(message)
 
 def on_error(ws, error):
-    ee.emit('error')
+    #ee.emit('error')
     print(error)
 
 def on_close(ws):
@@ -36,17 +36,18 @@ def connect(href):
         storeUrl = storeURL
         websocket.enableTrace(True)
         token = utils.requestToken(storeURL.host, '/ws', 'GET')
-        print("token received " + token)
+        print("token received " + str(token))
+
         try:
-            ws = websocket.WebSocketApp('wss://' + storeURL.host + '/ws', headers={'x-api-key': token}, on_message = on_message,
+            ws = websocket.WebSocketApp('wss://' + storeURL.host + ':' + str(storeURL.port) + '/ws', headers={'x-api-key': str(token)}, on_message = on_message,
                               on_error = on_error,
                               on_close = on_close)
             ws.on_open = on_open
-            ws.run_forever()
+            ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
         except Exception as e:
             print(e)
             print("[Websocket Connection Error]")
-           
+
 
 def subscribe(href, dataSourceID, type1):
         if(type1 is None or not type1):

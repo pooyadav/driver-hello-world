@@ -74,4 +74,6 @@ datareceived = databox.time_series.latest(store,'oaasunknown')
 print("Recent Data received " + str(datareceived))
 datareceived = databox.time_series.range(store,'oaasunknown', 1, 2)
 print("Data received " + str(datareceived))
+#databox.subscriptions.connect(store)
+
 
