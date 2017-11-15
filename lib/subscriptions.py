@@ -39,7 +39,7 @@ def connect(href):
         print("token received " + str(token))
 
         try:
-            ws = websocket.WebSocketApp('wss://' + storeURL.host + ':' + str(storeURL.port) + '/ws', headers={'x-api-key': str(token)}, on_message = on_message,
+            ws = websocket.WebSocketApp('wss://' + storeURL.host + ':' + str(storeURL.port) + '/ws', header={'x-api-key': str(token)}, on_message = on_message,
                               on_error = on_error,
                               on_close = on_close)
             ws.on_open = on_open
